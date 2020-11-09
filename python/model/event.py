@@ -9,6 +9,11 @@ from utils.constants import *
 class Event:
 
     def __init__(self, pid: int, events: list):
+        """
+
+        :param pid: Proposal id
+        :param events: List of events
+        """
 
         self.pid = pid
         self.proposal = None
@@ -17,7 +22,7 @@ class Event:
         self.proponents = []
         self.events = events
 
-    def prepare(self):
+    def prepare(self) -> None:
         """
         Prepare all the events messages, before process then
         :return:
@@ -117,7 +122,11 @@ class Event:
         except InvalidProposalException:
             return ""
 
-    def check_and_remove_deleted_events(self):
+    def check_and_remove_deleted_events(self) -> None:
+        """
+        Check for REMOVED or DELETED event actions and remove then from his prepared list
+        :return:
+        """
 
         for event in self.events:
 
@@ -131,23 +140,43 @@ class Event:
                     warranty_id = event_values[5]
                     self.remove_warranty(wid=warranty_id)
 
-    def create_or_update_proposal(self, pid: str, loan_value: float, monthly_installments: int):
+    def create_or_update_proposal(self, pid: str, loan_value: float, monthly_installments: int) -> None:
+        """
+
+        :param pid:
+        :param loan_value:
+        :param monthly_installments:
+        :return:
+        """
 
         self.proposal = Proposal(pid=pid, loan_value=loan_value, monthly_installments=monthly_installments)
 
-    def create_or_update_warranty(self, wid: str, pid: str, value: float, province: str):
+    def create_or_update_warranty(self, wid: str, pid: str, value: float, province: str) -> None:
+        """
+
+        :param wid:
+        :param pid:
+        :param value:
+        :param province:
+        :return:
+        """
 
         warranty = Warranty(wid=wid, pid=pid, value=value, province=province)
         self.warrantys.append(warranty)
 
-    def remove_warranty(self, wid: str):
+    def remove_warranty(self, wid: str) -> None:
+        """
+
+        :param wid:
+        :return:
+        """
 
         for warranty in self.warrantys:
             if warranty.wid == wid:
                 self.warrantys.remove(warranty)
 
     def create_or_update_proponent(self, prid: str, pid: str, name: str, age: int,
-                                   monthly_income: float, is_main: bool, event_action: str):
+                                   monthly_income: float, is_main: bool, event_action: str) -> None:
 
         if event_action == "added":
             proponent = Proponent(prid=prid, pid=pid, name=name, age=age, monthly_income=monthly_income, is_main=is_main)
@@ -162,7 +191,11 @@ class Event:
                     proponent.monthly_income = monthly_income
                     proponent.is_main = is_main
 
-    def get_proponent_quantity(self):
+    def get_proponent_quantity(self) -> int:
+        """
+
+        :return:
+        """
 
         return len(self.proponents)
 
@@ -181,7 +214,12 @@ class Event:
 
         return main_proponent_quantity
 
-    def validate_proponents_age(self, age=18):
+    def validate_proponents_age(self, age=18) -> bool:
+        """
+
+        :param age:
+        :return:
+        """
 
         for proponent in self.proponents:
             if proponent.is_under_age(age=age):
@@ -189,11 +227,19 @@ class Event:
 
         return True
 
-    def get_warranty_quantity(self):
+    def get_warranty_quantity(self) -> int:
+        """
+
+        :return:
+        """
 
         return len(self.warrantys)
 
-    def get_warrantys_total_value(self):
+    def get_warrantys_total_value(self) -> float:
+        """
+
+        :return:
+        """
 
         total = 0.0
         for warranty in self.warrantys:
@@ -202,7 +248,11 @@ class Event:
 
         return total
 
-    def validate_warrantys_province(self):
+    def validate_warrantys_province(self) -> bool:
+        """
+
+        :return:
+        """
 
         for warranty in self.warrantys:
             if not warranty.is_valid_province():

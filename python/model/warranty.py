@@ -16,7 +16,7 @@ class Warranty:
         self.value = value
         self.province = province
 
-    def is_valid_province(self):
+    def is_valid_province(self) -> bool:
         """
 
         :return:
