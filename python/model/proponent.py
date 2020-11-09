@@ -5,12 +5,12 @@ class Proponent:
     def __init__(self, prid: str, pid: str, name: str, age: int, monthly_income: float, is_main: bool):
         """
 
-        :param prid:
-        :param pid:
-        :param name:
-        :param age:
-        :param monthly_income:
-        :param is_main:
+        :param prid: Proponent id
+        :param pid: Proposal id
+        :param name: Proponent name
+        :param age: Proponent age
+        :param monthly_income: Proponent monthly incode
+        :param is_main: check if is the main proponent
         """
 
         self.pid = pid

@@ -3,6 +3,7 @@ from model.proponent import Proponent
 from model.warranty import Warranty
 from model.proposal import Proposal
 from utils.custom_exceptions import InvalidProposalException
+from utils.constants import *
 
 
 class Event:
@@ -96,13 +97,13 @@ class Event:
                 raise InvalidProposalException
             if not self.proposal.check_proposal_payment_range():
                 raise InvalidProposalException
-            elif not self.get_proponent_quantity() >= 2:
+            elif not self.get_proponent_quantity() >= MIN_NEEDED_PROPONENT:
                 raise InvalidProposalException
-            elif not self.set_main_proponent() == 1:
+            elif not self.set_main_proponent() == MAX_MAIN_PROPONENT_ALLOWED:
                 raise InvalidProposalException
-            elif not self.validate_proponents_age(age=18):
+            elif not self.validate_proponents_age(age=MIN_PROPONENT_AGE):
                 raise InvalidProposalException
-            elif not self.get_warranty_quantity() >= 1:
+            elif not self.get_warranty_quantity() >= MIN_NEEDED_WARRANTY:
                 raise InvalidProposalException
             elif not self.get_warrantys_total_value() >= (self.proposal.loan_value * 2):
                 raise InvalidProposalException

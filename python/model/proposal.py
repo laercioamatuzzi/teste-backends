@@ -5,9 +5,9 @@ class Proposal:
     def __init__(self, pid: str, loan_value: float, monthly_installments: int):
         """
 
-        :param pid:
-        :param loan_value:
-        :param monthly_installments:
+        :param pid: Proposal id
+        :param loan_value: Proposal loan value
+        :param monthly_installments: Proposal monthly installments
         """
 
         self.pid = pid

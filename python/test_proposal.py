@@ -1,5 +1,6 @@
 from controller.event_controller import EventController
 import unittest
+from utils.constants import *
 
 
 class TestProposal(unittest.TestCase):
@@ -29,18 +30,18 @@ class TestProposal(unittest.TestCase):
 
     def test_proponent_quantity(self):
 
-        self.assertGreaterEqual(self.event.get_proponent_quantity(), 2)
+        self.assertGreaterEqual(self.event.get_proponent_quantity(), MIN_NEEDED_PROPONENT)
 
     def test_only_one_main_proponent(self):
 
-        self.assertEqual(self.event.set_main_proponent(), 1)
+        self.assertEqual(self.event.set_main_proponent(), MAX_MAIN_PROPONENT_ALLOWED)
 
     def test_proponents_under_age(self):
 
-        self.assertTrue(self.event.validate_proponents_age())
+        self.assertTrue(self.event.validate_proponents_age(age=MIN_PROPONENT_AGE))
 
     def test_warranty_quantity(self):
-        self.assertGreaterEqual(self.event.get_warranty_quantity(), 1)
+        self.assertGreaterEqual(self.event.get_warranty_quantity(), MIN_NEEDED_WARRANTY)
 
     def test_warrantys_values_are_greater_then_doubled_loan_value(self):
 
