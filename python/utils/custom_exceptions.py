@@ -1,0 +1,4 @@
+
+class InvalidProposalException(Exception):
+    pass
+
