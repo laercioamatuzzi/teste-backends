@@ -1,6 +1,13 @@
 # Teste de Back-end Bcredi
 
 
+
+### Necessário
+```
+python3 ou superior
+```
+
+
 ### Para rodar os testes
 
 ```
